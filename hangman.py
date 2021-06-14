@@ -29,6 +29,7 @@ If all letters appear --> You lost
 if all letters revealed --> lost!
 '''
 
+#funny enough I am still commenting to play with git
 
 #rewrite the whole thing using classes?
 #what if we wanted to add possibility to get a hint?
