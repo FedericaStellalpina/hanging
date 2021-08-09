@@ -33,6 +33,7 @@ if all letters revealed --> lost!
 
 #rewrite the whole thing using classes?
 #what if we wanted to add possibility to get a hint?
+#if all letters are guessed, the person wins
 
 from list_of_words import words
 from random import choice
