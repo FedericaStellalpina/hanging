@@ -1,62 +1,16 @@
-'''
------
-Game: guess the word
-Pick random word (phone)
-Guess a letter for each round (up to the word's length)
-For each guess, either:
-
-Letter is correct, show __o_e and ask if they want to guess word
-
-Letter is incorrect, show 'Try again' for a max of 3 wrong guesses
-
-If 3 wrong guesses --> You lost
-If guessed word == right --> You win
-If guessed word != right --> You lost
-
-If all letters appear --> You lost
-
-
-1) random word needs to be picked (at first from an array, then use random with pip)
-2) Function 1 = guessing letters
-- if guessed letter in word, show __o_e and ask for guess
-- if guessed leter, not in word: try again up to 3 times
-
-3) Function 2
-- if guessed word == right --> win, win
-- if guessed word == wrong --> nope
-
-4) Function 4
-if all letters revealed --> lost!
-'''
-
-#funny enough I am still commenting to play with git
 
 #rewrite the whole thing using classes?
-#what if we wanted to add possibility to get a hint?
-#if all letters are guessed, the person wins!
+#what if we wanted to add possibility to get a hint
+#change the logic for possibility to guess the word. it should not appear at the first letter you guess
+#make list for words longer & remove 3 letters strings?
 
 from list_of_words import words
 from random import choice
 import re
 import sys
 
-#make list for words longer & remove 3 letters strings?
 
 letter_guessed=[]
-
-'''
-def choose():
-    chosen_word = choice(words)
-    length = len(chosen_word)
-    number_guess= length - 2
-    return chosen_word, number_guess
-#this one changes the word every single time...F***!
-
-
-class RandomWord:
-    def __init__(chosen_word):
-        self.chosen_word = choice(words)  
-'''
 
 def start():
     chosen_word = choice(words)
@@ -79,19 +33,24 @@ def guess_letters(guesses, chosen_word, number_guess):
                 print ("Error! You can only guess 1 letter!")
                 guess_letters(guesses, chosen_word, number_guess)
             elif not re.match("^[a-z]*$", letter):
-                print ("Error! Only letters are allowed!")
+                print ("Error! Only letters are allowed!") #not sure this is working :(
                 guess_letters(guesses, chosen_word, number_guess)
             else:
                 guesses +=1
                 if letter in chosen_word and letter not in letter_guessed:
-                        
                     print('Nice! That is correct:')
                     letter_guessed.append(letter)
                     hidden_word= (''.join( c if c in letter_guessed else '_' for c in chosen_word))
-                    print(hidden_word)
-                    print()
-                    print('Number of guesses: ',guesses)
-                    guess_word(guesses, chosen_word, number_guess)
+                    if hidden_word != chosen_word:
+                        print(hidden_word)
+                        print()
+                        print('Number of guesses: ',guesses)
+                        guess_word(guesses, chosen_word, number_guess)
+
+                    elif hidden_word==chosen_word:
+                        print('You found the word!')
+                        print(hidden_word)
+                        restart()
                         
                     
                 elif letter in letter_guessed:
@@ -141,6 +100,7 @@ def restart():
     elif again == 'no':
         print('This was fun! Have a good one until next time!')
         sys.exit()
+        #find another way to exit the system 
     else:
         print('What did you say? Try once more.')
         restart()                       
