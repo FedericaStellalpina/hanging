@@ -3,6 +3,7 @@
 #what if we wanted to add possibility to get a hint
 #change the logic for possibility to guess the word. it should not appear at the first letter you guess
 #make list for words longer & remove 3 letters strings?
+#keep the guessed letters even if they are wrong, so they don't count as a guess?
 
 from list_of_words import words
 from random import choice
@@ -33,7 +34,7 @@ def guess_letters(guesses, chosen_word, number_guess):
                 print ("Error! You can only guess 1 letter!")
                 guess_letters(guesses, chosen_word, number_guess)
             elif not re.match("^[a-z]*$", letter):
-                print ("Error! Only letters are allowed!") #not sure this is working :(
+                print ("Error! Only letters are allowed!") #this only works if single number is the input
                 guess_letters(guesses, chosen_word, number_guess)
             else:
                 guesses +=1
